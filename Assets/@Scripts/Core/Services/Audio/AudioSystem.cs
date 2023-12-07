@@ -1,9 +1,8 @@
-using Core.Infrastructure.Services;
 using UnityEngine;
 
 namespace Core.Services.Audio
 {
-    public class AudioSystem : MonoBehaviour, IService
+    public class AudioSystem : MonoBehaviour
     {
         [SerializeField] AudioSource music;
         [SerializeField] AudioSource effects;

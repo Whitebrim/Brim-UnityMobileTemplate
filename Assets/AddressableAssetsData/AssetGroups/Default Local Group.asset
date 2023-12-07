@@ -16,7 +16,11 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 205d943ddc117c748875293bd50e6963
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: fb63461c92eebb3408ec7e7362e109dc
+    m_Address: Ceramic_Menu_Button
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 10f25cd62c7ef594384c13217abb6d2d, type: 2}
   m_SchemaSet:

@@ -1,9 +1,8 @@
-using Core.Infrastructure.Services;
 using System;
 
-namespace Core.Services
+namespace Core.Services.SceneLoader
 {
-    public interface ISceneLoader : IService
+    public interface ISceneLoader
     {
         void Load(string sceneName, Action onLoad = null);
     }

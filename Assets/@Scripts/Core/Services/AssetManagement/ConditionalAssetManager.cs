@@ -1,12 +1,11 @@
 using System;
-using Core.Infrastructure.Services;
 using Sirenix.OdinInspector;
 using UnityEngine.AddressableAssets;
 using UnityEngine;
 
 namespace Core.Services.AssetManagement
 {
-    public class VariableAssets : SerializedScriptableObject, IService
+    public class ConditionalAssetManager : SerializedScriptableObject
     {
         //Example
         //[HideLabel, BoxGroup(GroupID = "Nakama Connection", CenterLabel = true, LabelText = "Nakama Connection", ShowLabel = true)] public VariableAsset<NakamaConnection> NakamaConnection;

@@ -1,13 +1,16 @@
 using Core.Services;
+using Core.Services.SceneLoader;
+using VContainer;
 
 namespace Core.Infrastructure.States
 {
     public class LoadLevelState : IPayloadedState<string>
     {
-        private readonly GameStateMachine _stateMachine;
-        private readonly ISceneLoader _sceneLoader;
+        private GameStateMachine _stateMachine;
+        private ISceneLoader _sceneLoader;
 
-        public LoadLevelState(GameStateMachine stateMachine, ISceneLoader sceneLoader)
+        [Inject]
+        private void Construct(GameStateMachine stateMachine, ISceneLoader sceneLoader)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;

@@ -1,7 +1,7 @@
-using Core.Infrastructure.Services;
 using Core.Services.Audio;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 using AudioType = Core.Services.Audio.AudioType;
 
 [RequireComponent(typeof(Button))]
@@ -12,12 +12,17 @@ public class ClickSound : MonoBehaviour
     private Button _button;
     private AudioSystem _audioSystem;
 
+    [Inject]
+    private void Construct(AudioSystem audioSystem)
+    {
+        _audioSystem = audioSystem;
+    }
+
     private void Start()
     {
         if (sound == null) return;
 
         _button = GetComponent<Button>();
-        _audioSystem = ServiceLocator.Container.Single<AudioSystem>();
         InjectSound();
     }
 

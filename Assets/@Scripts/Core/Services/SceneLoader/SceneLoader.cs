@@ -2,14 +2,16 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
 
-namespace Core.Services
+namespace Core.Services.SceneLoader
 {
     public class SceneLoader : ISceneLoader
     {
-        private readonly ICoroutineRunner _coroutineRunner;
+        private ICoroutineRunner _coroutineRunner;
 
-        public SceneLoader(ICoroutineRunner coroutineRunner) =>
+        [Inject]
+        private void Construct(ICoroutineRunner coroutineRunner) =>
             _coroutineRunner = coroutineRunner;
 
         public void Load(string sceneName, Action onLoad = null) =>

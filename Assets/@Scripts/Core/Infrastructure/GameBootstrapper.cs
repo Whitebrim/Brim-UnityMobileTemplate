@@ -1,4 +1,3 @@
-using Core.Infrastructure.Services;
 using Core.Infrastructure.States;
 using Core.Services;
 using Core.Services.AssetManagement;
@@ -6,6 +5,7 @@ using Core.Services.Audio;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
+using VContainer;
 
 namespace Core.Infrastructure
 {
@@ -13,8 +13,16 @@ namespace Core.Infrastructure
     public class GameBootstrapper : MonoBehaviour, ICoroutineRunner
     {
         public static bool IsInitialized;
-        private static Game _game;
-        [SerializeField] private VariableAssets assetManager;
+
+        [SerializeField] private ConditionalAssetManager assetManager;
+        
+        private Game _game;
+
+        [Inject]
+        private void Construct(Game game)
+        {
+            _game = game;
+        }
 
         private void Awake()
         {
@@ -27,13 +35,9 @@ namespace Core.Infrastructure
             ApplicationInit();
 
             DontDestroyOnLoad(this);
-            ServiceLocator.Container.RegisterSingle<ICoroutineRunner>(this);
-            ServiceLocator.Container.RegisterSingle(GetComponent<AudioSystem>());
-            ServiceLocator.Container.RegisterSingle(GetComponent<MainThreadDispatcher>());
 
             IsInitialized = true;
 
-            _game = new Game(this, assetManager);
             _game.StateMachine.Enter<BootstrapState>();
         }
 

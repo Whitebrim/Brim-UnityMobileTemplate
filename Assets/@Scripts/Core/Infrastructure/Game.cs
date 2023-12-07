@@ -1,17 +1,16 @@
-using Core.Infrastructure.Services;
 using Core.Infrastructure.States;
-using Core.Services;
-using Core.Services.AssetManagement;
+using VContainer;
 
 namespace Core.Infrastructure
 {
     public class Game
     {
-        public readonly GameStateMachine StateMachine;
+        public GameStateMachine StateMachine;
 
-        public Game(ICoroutineRunner coroutineRunner, VariableAssets assetManager)
+        [Inject]
+        private void Construct(GameStateMachine stateMachine)
         {
-            StateMachine = new GameStateMachine(ServiceLocator.Container, assetManager);
+            StateMachine = stateMachine;
         }
     }
 }

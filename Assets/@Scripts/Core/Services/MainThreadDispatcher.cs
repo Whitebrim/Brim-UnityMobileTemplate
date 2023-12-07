@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Core.Infrastructure.Services;
 using UnityEngine;
 
 namespace Core.Services
 {
-    public class MainThreadDispatcher : MonoBehaviour, IService
+    public class MainThreadDispatcher : MonoBehaviour
     {
         private readonly List<Action> _actions = new List<Action>();
         private bool _queued = false;

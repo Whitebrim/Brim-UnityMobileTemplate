@@ -1,26 +1,16 @@
-using Core.Infrastructure.Services;
-using Core.Services;
-using Core.Services.AssetManagement;
-using System;
-using System.Collections.Generic;
+using VContainer;
 
 namespace Core.Infrastructure.States
 {
-    public class GameStateMachine : IService
+    public class GameStateMachine
     {
-        private readonly Dictionary<Type, IBaseState> _states;
+        private IObjectResolver _resolver;
         private IBaseState _currentState;
 
-        public GameStateMachine(ServiceLocator services, VariableAssets assetManager)
+        [Inject]
+        private void Construct(IObjectResolver resolver)
         {
-            services.RegisterSingle(this);
-
-            _states = new Dictionary<Type, IBaseState>
-            {
-                [typeof(BootstrapState)] = new BootstrapState(this, services, assetManager),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, services.Single<ISceneLoader>()),
-                [typeof(GameLoopState)] = new GameLoopState(this, services, services.Single<IAssetProvider>()),
-            };
+            _resolver = resolver;
         }
 
         public void Enter<TState>() where TState : class, IState
@@ -36,7 +26,7 @@ namespace Core.Infrastructure.States
         }
 
         private TState GetState<TState>() where TState : class, IBaseState =>
-            _states[typeof(TState)] as TState;
+            _resolver.Resolve<TState>();
 
         private TState ChangeState<TState>() where TState : class, IBaseState
         {
