@@ -43,7 +43,7 @@ namespace Core.Infrastructure
 
         private void ApplicationInit()
         {
-            Application.targetFrameRate = Screen.currentResolution.refreshRate;
+            UnityEngine.Application.targetFrameRate = Mathf.Max(Screen.currentResolution.refreshRate, 60);
             Addressables.InitializeAsync();
         }
     }
