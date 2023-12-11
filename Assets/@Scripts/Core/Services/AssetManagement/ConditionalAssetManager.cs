@@ -8,11 +8,11 @@ namespace Core.Services.AssetManagement
     public class ConditionalAssetManager : SerializedScriptableObject
     {
         //Example
-        //[HideLabel, BoxGroup(GroupID = "Nakama Connection", CenterLabel = true, LabelText = "Nakama Connection", ShowLabel = true)] public VariableAsset<NakamaConnection> NakamaConnection;
+        //[HideLabel, BoxGroup(GroupID = "Nakama Connection", CenterLabel = true, LabelText = "Nakama Connection", ShowLabel = true)] public ConditionalAsset<NakamaConnection> NakamaConnection;
     }
 
     [Serializable]
-    public class VariableAsset<TObj> where TObj : UnityEngine.Object
+    public class ConditionalAsset<TObj> where TObj : UnityEngine.Object
     {
         public TObj Load => Debug.isDebugBuild ? debug.LoadAndCache() : release.LoadAndCache();
 

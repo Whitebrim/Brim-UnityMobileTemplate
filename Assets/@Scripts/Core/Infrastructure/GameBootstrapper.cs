@@ -16,12 +16,12 @@ namespace Core.Infrastructure
 
         [SerializeField] private ConditionalAssetManager assetManager;
         
-        private Game _game;
+        private GameStateMachine _stateMachine;
 
         [Inject]
-        private void Construct(Game game)
+        private void Construct(GameStateMachine stateMachine)
         {
-            _game = game;
+            _stateMachine = stateMachine;
         }
 
         private void Awake()
@@ -38,7 +38,7 @@ namespace Core.Infrastructure
 
             IsInitialized = true;
 
-            _game.StateMachine.Enter<BootstrapState>();
+            _stateMachine.Enter<BootstrapState>();
         }
 
         private void ApplicationInit()

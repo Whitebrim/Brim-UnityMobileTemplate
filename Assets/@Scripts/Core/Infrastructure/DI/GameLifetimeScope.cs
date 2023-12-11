@@ -22,6 +22,8 @@ namespace Core.Infrastructure.DI
         {
             if (GameBootstrapper.IsInitialized) return;
 
+            DontDestroyOnLoad(gameObject);
+
             builder.Register<IObjectResolver, Container>(Lifetime.Scoped);
 
             builder.RegisterComponent(gameBootstrapper).AsImplementedInterfaces();
@@ -33,8 +35,6 @@ namespace Core.Infrastructure.DI
             builder.Register<LoadLevelState>(Lifetime.Singleton);
             builder.Register<GameLoopState>(Lifetime.Singleton);
             builder.Register<GameStateMachine>(Lifetime.Singleton);
-
-            builder.Register<Game>(Lifetime.Singleton);
 
             builder.Register<SceneLoader>(Lifetime.Singleton).AsImplementedInterfaces();
             builder.Register<AddressablesProvider>(Lifetime.Singleton).AsImplementedInterfaces();
